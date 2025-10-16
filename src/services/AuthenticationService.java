@@ -151,7 +151,7 @@ public class AuthenticationService {
         return true;
     }
 
-    private String generateCustomerId() {
+    private synchronized String generateCustomerId() {
         int maxId = 0;
         for (User user : users) {
             if (user.getUserId().startsWith("C")) {

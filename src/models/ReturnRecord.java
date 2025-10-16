@@ -3,18 +3,42 @@ package models;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class ReturnRecord extends RentalTransaction {
+public class ReturnRecord {
+    private String rentalId;
+    private String equipmentId;
+    private String customerId;
+    private LocalDate startDate;
     private LocalDate endDate;
     private double lateFee;
     private String condition;
+    private double totalCost;
 
     public ReturnRecord(String rentalId, String equipmentId, String customerId,
                         LocalDate startDate, LocalDate endDate, double totalCost) {
-        super(rentalId, equipmentId, customerId, startDate, totalCost);
+        this.rentalId = rentalId;
+        this.equipmentId = equipmentId;
+        this.customerId = customerId;
+        this.startDate = startDate;
         this.endDate = endDate;
         this.lateFee = 0.0;
         this.condition = "Good";
+        this.totalCost = totalCost;
     }
+
+    public String getRentalId() { return rentalId; }
+    public void setRentalId(String rentalId) { this.rentalId = rentalId; }
+
+    public String getEquipmentId() { return equipmentId; }
+    public void setEquipmentId(String equipmentId) { this.equipmentId = equipmentId; }
+
+    public String getCustomerId() { return customerId; }
+    public void setCustomerId(String customerId) { this.customerId = customerId; }
+
+    public LocalDate getStartDate() { return startDate; }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
+
+    public double getTotalCost() { return totalCost; }
+    public void setTotalCost(double totalCost) { this.totalCost = totalCost; }
 
     public LocalDate getEndDate() { return endDate; }
     public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
@@ -37,7 +61,6 @@ public class ReturnRecord extends RentalTransaction {
                 endDate.format(formatter), totalCost, lateFee, condition);
     }
 
-    @Override
     public String toCsvString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return String.format("%s,%s,%s,%s,%s,%.2f,%.2f,%s",

@@ -85,7 +85,7 @@ public class RentalService {
         return true;
     }
 
-    private String generateEquipmentId() {
+    private synchronized String generateEquipmentId() {
         int maxId = 100;
         for (Equipment eq : equipment) {
             if ((eq.getId().startsWith("E"))) {
